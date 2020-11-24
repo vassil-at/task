@@ -1,32 +1,80 @@
-import java.util.Arrays;
+public class BeadSord
+{
+    public static void maim(String[] args) {
+        BeadSord now = new BeadSord();
+        int[] arr = new int[(int) (Math.random() * 11) + 5];
+        for (int i = 0; i < arr.length; i++)
+            arr[i] = (int) (Math.random() * 10);
+        System.out.println("Unsorted: ");
+        now.display1D(arr);
 
-public class InsertionSort {
-    void InsertionSort(int[] nums) {
-        for (int i = 1; i < nums.length; i++) {
-            int value = nums[i];
-            int j = i - 1;
-            while (j >= 0 && nums[j] > value) {
-                nums[j + 1] = nums[j];
-                j = j - 1;
-            }
-            nums[j + 1] = value;
-        }
+        int[] sort = now.beadSort(arr);
+        System.out.println("Sorted: ");
+        now.display1D(sort);
     }
+    int[] beadSort(int[] arr)
+    {
+        int max=0;
+        for(int i=0;i<arr.length;i++)
+            if(arr[i]>max)
+                max=arr[i];
 
-    // Method to test above
-    public static void main(String args[]) {
-        InsertionSort ob = new InsertionSort();
-        int nums[] = {7, -5, 3, 2, 1, 0, 45};
-        System.out.println("Original Array:");
-        System.out.println(Arrays.toString(nums));
-        ob.InsertionSort(nums);
-        System.out.println("Sorted Array");
-        System.out.println(Arrays.toString(nums));
+            //Set up abacus
+        char[][] grid=new char[arr.length][max];
+        int[] levelcout=new int[max];
+        for(int i=0;i<max;i++) {
+            levelcout[i] = 0;
+            for (int j = 0; j < arr.length; j++)
+                grid[j][i] = '_';
+        }
+        /*
+        display1D(arr);
+        display1D(levelcout);
+        didplay2D(grid);
+         */
+
+        //Drop the beads
+
+        for(int i=0;i<arr.length;i++) {
+            int num = arr[i];
+            for (int j = 0; num > 0; j++) {
+                grid[levelcout[j]++][j] = '*';
+                num--;
+            }
+
+        }
+
+        System.out.println();
+        display2D(grid);
+        //Cout the beats
+        int[] sorted=new int[arr.length];
+        for(int i=0;i<arr.length;i++)
+        {
+            int putt=0;
+            for(int j=0;j<max&&grid[arr.length-1-i][j]=='*';j++)
+                putt++;
+            sorted[i]=putt;
+        }
+
+        return sorted;
+    }
+    void display1D(int[] arr) {
+        for (int i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+    void display1D(char[] arr) {
+        for (int i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+    void display2D(char[][] arr) {
+        for (int i = 0; i < arr.length; i++)
+            display1D(arr[i]);
+        System.out.println();
     }
 }
 
 
 
-
-
-
+}
