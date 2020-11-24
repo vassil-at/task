@@ -1,44 +1,32 @@
 import java.util.Arrays;
-class CombSort {
-    void CombSort(int nums[]) {
-        int gap_length = nums.length;
-        fload shrinkFactor = 1.3f;
-        boolean swapped = false;
-
-        while (gap_length > 1 || swapped) {
-            if (gap_length > 1) {
-                gap_length = (int) (gap_length / shrinkFactor);
-            }
-
-            swapped = false;
-
-            for (int i = 0; gap_length + i < nums.length; i++) {
-                if (nums[i] > nums[i + gap_length]) {
-                    swap(nums, i, i + gap_length);
-                    swapped = true;
+class BubbleSort {
+    void bubbleSort(int nums[]) {
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++)
+            for (int j = 0; j < n - i - 1; j++)
+                if (nums[j] > nums[j + 1]) {
+                    // swap temp and nums[i]
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
                 }
-            }
-        }
-    }
-
-    private static void swap(int nums[], int x, int y) {
-        Integer temp = nums[x];
-        nums[x] = nums[y];
-        nums[y] = temp;
     }
 
     // Method to test above
     public static void main(String args[]) {
-        CombSort ob = new CombSort();
+        BubbleSort ob = new BubbleSort();
         int nums[] = {7, -5, 3, 2, 1, 0, 45};
         System.out.println("Original Array:");
         System.out.println(Arrays.toString(nums));
-        ob.CombSort(nums);
+        ob.bubbleSort(nums);
         System.out.println("Sorted Array");
         System.out.println(Arrays.toString(nums));
     }
 }
 
 
-                
+
+
+
+
 
