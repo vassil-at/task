@@ -1,37 +1,32 @@
 import java.util.Arrays;
-public class SelectionSort {
-    public static void sort(int[] nums)
-    {
-        for(int currentPlace = 0;currentPlace<nums.length-1;currentPlace++){
-            int smallest = Integer.MAX_VALUE;
-            int smallestAt = currentPlace+1;
-            for(int check = currentPlace; check<nums.length;check++) {
-                if (nums[check] < smallest) {
-                    smallestAt = check;
-                    smallest = nums[check];
-                    {
-                    }
-                    int temp = nums[currentPlace];
-                    nums[currentPlace] = nums[smallestAt];
-                    nums[smallestAt] = temp;
-                }
-                {
-                    // Method to test above
-                    public static void main (String args[])
-                    {
-                        SelectionSort ob = new SelectionSort();
-                        int nums[] = {7, -5, 4, 3, 2, 1, 0, 45};
-                        System.out.println("Original Array:");
-                        System.out.println(Arrays.toString(nums));
-                        ob.sort(nums);
-                        System.out.println("Sorted Array:");
-                        System.out.println(Arrays.toString(nums));
-                    }
-                }
 
+public class InsertionSort {
+    void InsertionSort(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            int value = nums[i];
+            int j = i - 1;
+            while (j >= 0 && nums[j] > value) {
+                nums[j + 1] = nums[j];
+                j = j - 1;
+            }
+            nums[j + 1] = value;
+        }
+    }
 
-
-
-
+    // Method to test above
+    public static void main(String args[]) {
+        InsertionSort ob = new InsertionSort();
+        int nums[] = {7, -5, 3, 2, 1, 0, 45};
+        System.out.println("Original Array:");
+        System.out.println(Arrays.toString(nums));
+        ob.InsertionSort(nums);
+        System.out.println("Sorted Array");
+        System.out.println(Arrays.toString(nums));
     }
 }
+
+
+
+
+
+
