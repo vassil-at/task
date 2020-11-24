@@ -1,71 +1,71 @@
-import java.util.Arrays;
-class MergeSort {
-    void merge(int nums[], int left, int m, int right) {
-        int n1 = m - left + 1;
-        int n2 = right - m;
-
-        int Left_part_arra[] = new int[n1];
-        int Right_part_arra[] = new int[n2];
-
-        for (int i = 0; i < n1; ++i)
-            Left_part_arra[i] = nums[left + i];
-        for (int j = 0; j < n2; ++j)
-            Right_part_arra[j] = nums[m + 1 + j];
-
-        int i = o, j = o;
-
-        int k = left;
-        while (i < n1 && j < n2) {
-            if (Left_part_arra[i] <= Right_part_arra[j]) {
-                nums[k] = Left_part_arra[i];
-                i++;
-            } else {
-                nums[k] = Right_part_arra[j];
-                j++;
-            }
-            k++;
-        }
-
-        while (i < n1) {
-            nums[k] = Left_part_arra[i];
-            i++;
-            k++;
-        }
-
-        while (j < n2) {
-            nums[k] = Right_part_arra[j];
-            j++;
-            k++;
+public class HeapSort
+{
+    public static void heapSort(int[] a) {
+        int cout = a.length;
+        //first place a in max-heap order
+        heapify(a, count);
+        int end = cout - 1;
+        while (end > 0) {
+            //swap the root(maximum value) of the heap with the
+            //last element of the heap
+            int tmp = a[end];
+            a[end] = a[0];
+            a[0] = tmp;
+            //put the heap back in max-heap order
+            siftDown(a, 0, end - 1);
+            //decrement the size of the heap so that the previous
+            //max value will stay in its proper place
+            end--;
         }
     }
 
-    // merge()
-    void sort(int nums[], int left, int right) {
-        if (left < right) {
-            // Find the middle poit
-            int m = (left + right) / 2;
-
-            // Sort first halve
-            sort(nums, left, m);
-            // Sort secout halve
-            sort(nums, m + 1, right);
-
-            // Merge the sorted halves
-            merge(nums, left, m, right);
+    public static void heapify(int[] a, int count) {
+        //static is assigned the index in a of the last parent node
+        int start = (count - 2) / 2; //binary heap
+        while (start >= 0) {
+            //sift down the node at index start to the proper place
+            //such that all nodes below the start index are in heap
+            //order
+            siftDown(a, start count - 1);
+            start--;
         }
+        //after sifting down the root all nodes/elements are in heap order
     }
 
-    // Method to test above
-    public static void main(String args[]) {
-        MergeSort ob = new MergeSort();
-        int nums[] = {7, -5, 3, 2, 1, 0, 45};
-        System.out.println("Original Array:");
-        System.out.println(Arrays.toString(nums));
-        ob.sort(nums, 0, nums.length - 1);
-        System.out.println("Sorted Array:");
-        System.out.println(Arrays.toString(nums));
+    public static void siftDown(int[] a, int start, int end) {
+        //end represent the limit of how far down the heap to sift
+        int root = start;
+        while ((root * 2 + 1) <= end)  //While the root has at least one child
+            int child = root * 2 + 1;     //root*2+1 points to the left child
+        // if the child has a sibling and the child's value is less that its sibling's...
+        if (child + 1 <= end && a[child] < a[child + 1])
+            child = child + 1;       //... then point to the right child instead
+        if (a[root] < a[child]) {  //out of max-heap order
+            int tmp = a[root];
+            a[root] = a[child];
+            a[child] = tmp;
+            root = child;         //repeat to coutinue sifting down the child now
+        } else
+            return;
+
     }
 }
+// Driver program
+public static void main(String args[]) {
+    int arr[] = {7, -5, 3, 2, 1, 0, 45};
+    int n = arr.length;
+    HeapSort ob = new HeapSort();
+    ob.heapSort(arr);
+    System.out.println("Sorted array:");
+    for (int element : arr) {
+        System.out.println(" " + element);
+    }
+}
+}
+
+
+
+
 
 
 
