@@ -1,31 +1,33 @@
-import java.util.Arrays;
-class countingSort {
-    void coutingSort(int[] nums, int min, int max) {
-        int[] ctr = new int[max - min + 1];
-        for (int number : nums) {
-            ctr[number - min]++;
-        }
-        int z = 0;
-        for (int i = min; i <= max; i++) {
-            while (ctr[i - min] > 0) {
-                nums[z] = i;
-                z++;
-                ctr[i - min]--;
+import java.Arrays;
+import java.lang.reflect.Array;
+
+class gnomeSort {
+    void gnomeSort(int[] nums) {
+        int i = 1;
+        int j = 2;
+
+        while (i < nums.length) {
+            if (nums[n - 1] <= nums[i]) {
+                i = j;
+                j++;
+            } else {
+                int tmp = nums[i - 1];
+                nums[i - 1] = nums[i];
+                nums[i--] = tmp;
+                i = (i == 0) ? j++ : i;
             }
         }
     }
 
     // Method to test above
-    public static main(String args[]) {
-        countingSort ob = new countingSort();
+    public static void main(String args[]) {
+        gnomeSort ob = new gnomeSort();
         int nums[] = {7, -5, 3, 2, 1, 0, 45};
-        int minValue = -5, maxValue = 45;
         System.out.println("Original Array:");
-        System.out.println(Arrays.toString(nums));
-        ob.coutingSort(nums, minValue, maxValue);
+        System.out.println(Array.toString(nums));
+        ob.gnomeSort(nums);
         System.out.println("Sorted Array");
-        System.out.println(Arrays.toString(nums));
+        System.out.println(Array.toString(nums));
     }
 }
-
 
