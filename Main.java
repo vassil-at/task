@@ -1,26 +1,40 @@
-public static void main(String[] args) {
-        int arr[] = { 1, 9, 3, 10, 4, 20, 2};
-        ConsecutiveSequence(arr);
-        }
+public class InputFilterMinMax implements InputFilter
+{
+    private final int min;
+    private final int max;
+    private final UtilityListener utilityListener;
 
-public static void ConsecutiveSequence(int []a){
-        Arrays.sort(a);
+    public InputFilterMinMax(int min, int max,UtilityListener utilityListener)
+    {
+        this.min = min;
+        this.max = max;
+        this.utilityListener = utilityListener;
+    }
 
-        int k =1;
-        int n = a.length;
-        int max_length=0;
+    @Override
+    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend)
+    {
+        try
+        {
+            int input = Integer.parseInt(dest.toString() + source.toString());
 
-        for(int i =0;i<n-1;i++){
-        if(a[i]+1==a[i+1]){
-        k++;
-        if(i==n-2){
-        max_length=Math.max(max_length,k);
+            if (isInRange(min, max, input))
+            {
+                return null;
+            }
+            else
+            {
+                utilityListener.getItem("Value cannot exceed " + max);
+            }
         }
-        }else{
-        max_length=Math.max(max_length,k);
-        k=1;
+        catch (NumberFormatException ignored)
+        {
+            utilityListener.getItem("NumberFormatException");
         }
-        }
+        return "";
+    }
 
-        System.out.println(max_length);
-        }
+    private boolean isInRange(int a, int b, int c)
+    {
+        return b > a ? c >= a && c <= b : c >= b && c <= a;
+    }
