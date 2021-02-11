@@ -1,18 +1,32 @@
-public class Example {
-    static class A {
-        int x;
-    }
-    static class B extends A {}
-
-    static <U> U genericMethod(U param) {
-        int i = param.x; // compile time error
-        System.out.println(param.getClass()); // prints B
-        return param;
-    }
-
-    public static void main(String... args) {
-        A var1 = new B();
-        A var2 = genericMethod(var1);
-        B var3 = genericMethod(var1); // compile time error
-    }
-}
+<dependencyManagement>
+<dependencies>
+<dependency>
+<groupId>javax.mail</groupId>
+<artifactId>mail</artifactId>
+<version>???</version><!-- put the "right" version here -->
+</dependency>
+</dependencies>
+</depend<dependency>
+<groupId>log4j</groupId>
+<artifactId>log4j</artifactId>
+<version>1.2.15</version>
+<scope>provided</scope>
+<exclusions>
+<exclusion>
+<groupId>javax.mail</groupId>
+<artifactId>mail</artifactId>
+</exclusion>
+<exclusion>
+<groupId>javax.jms</groupId>
+<artifactId>jms</artifactId>
+</exclusion>
+<exclusion>
+<groupId>com.sun.jdmk</groupId>
+<artifactId>jmxtools</artifactId>
+</exclusion>
+<exclusion>
+<groupId>com.sun.jmx</groupId>
+<artifactId>jmxri</artifactId>
+</exclusion>
+</exclusions>
+</dependency>encyManagement
